@@ -1,0 +1,9 @@
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\bin\Debug\netcoreapp3.1\MeterAfricaClassLib.deps.json
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\bin\Debug\netcoreapp3.1\MeterAfricaClassLib.dll
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.csprojAssemblyReference.cache
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.AssemblyInfoInputs.cache
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.AssemblyInfo.cs
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.csproj.CoreCompileInputs.cache
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\bin\Debug\netcoreapp3.1\MeterAfricaClassLib.pdb
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.dll
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.pdb

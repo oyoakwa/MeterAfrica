@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+html, body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #424242
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum 
+viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+}
+main{
+    flex: 1 0 auto;
+}
+.input-group{
+    width: 256px !important;
+    height: 30px;
+}
+.input-group-text{ 
+    border: none !important;
+    border-bottom: 1px solid #e8e8e8 !important;
+    background: #fff !important;
+    color: #e8e8e8 !important;
+}
+.input-group >.form-control{
+    border: none !important;
+    border-bottom: 1px solid #e8e8e8 !important; 
+    color: #e8e8e8;
+}
+.nav-link{ 
+    color: #0e94dd !important;
+    font-weight: 500;
+}
+.intro{ margin-top: 76px; }
+.intro h2{ 
+    font-size: 46px;
+    line-height: 52px;
+    font-weight: 900;   
+}
+.intro p{
+    font-weight: 500;
+    line-height: 22px;
+    color: #c1c1c3;
+}
+.intro h4{ 
+    font-weight: 600;
+    margin-top: 40px;
+}
+.carousel-inner{ background: #0e94dd; }
+.payments{
+    margin-top: 30px;
+    
+}
+.paye{ 
+    background: #f4f6fb;
+    
+}
+.pay-info h4{ 
+    font-size: 16px;
+    font-weight: 900;
+}
+.paye > button{
+    background: #0e94dd;
+    border-radius: 31px;
+    height: 62px;
+}
+.footer{
+    background: #0e94dd;
+    font-size: 14px;
+    padding-top: 20px;
+    /*padding-bottom: 10px;
+    margin-top: 256px;*/
+}
+.c-brand{
+    color: #0e94dd;
+}
+.payment-details{
+    background: #0e94dd;
+}
+.btn-rounded{ border-radius: 30px}
+.btn-yellow{ 
+    background: #f4de0f;
+    height: 62px;
+    font-weight: 900;
+    font-size: 18px; 
+}
+.btn-brand{
+    background: #0e94dd; 
+    height: 62px;
+}
+.token_msg{
+    height: 211px;
+    text-align: center;
+}
+
+@media screen and (max-width: 575px){
+    .intro h2{
+        font-size: 36px;
+    }
+    .paye{ padding: 8px; }
+    .pay-info{
+        /*padding: 20px 10px !important;*/
+    }
+    footer{
+        margin-top: 100px !important;
+    }
+}
