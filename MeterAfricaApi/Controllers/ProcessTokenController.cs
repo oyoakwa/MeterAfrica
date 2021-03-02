@@ -17,7 +17,7 @@ namespace MeterAfricaApi.Controllers
         private readonly IGetDiscoService _discoService;
         private readonly IValidateMeterNumberService _validateMeter;
         private readonly IConfiguration _configuration;
-        private readonly PayServices _pay;
+        
 
         public ProcessTokenController(IGetDiscoService discoService, IValidateMeterNumberService validateMeter, PayServices pay)
         {
@@ -25,8 +25,6 @@ namespace MeterAfricaApi.Controllers
                 ?? throw new ArgumentNullException(nameof(discoService));
             _validateMeter = validateMeter
                 ?? throw new ArgumentNullException(nameof(validateMeter));
-            _pay = pay
-                ?? throw new ArgumentNullException(nameof(pay));
         }
         
         [HttpGet("get-discos")]
