@@ -70,7 +70,7 @@ namespace MeterAfrica.Data.MeterAfricaServices
         {
             try
             {
-                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/charge/card");
+                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/charge/charge/card");
 
                 if (response.status)
                 {
@@ -92,7 +92,7 @@ namespace MeterAfrica.Data.MeterAfricaServices
         {
             try
             {
-                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/charge/otp");
+                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: $"/api/charge/charge/{req.Otp}");
 
                 if (response.status)
                 {
