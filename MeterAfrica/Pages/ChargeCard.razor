@@ -17,33 +17,33 @@
                 PAYMENT DETAILS
             </div>
 
-            <EditForm Model="@chargeRequest">
+            <EditForm Model="@ccr">
                 <div class="form-group  pl-2 py-2">
                     <label for="" class="pl-2"><strong>Card Number</strong> </label>
                     <br>
-                    <input asp-for="CardNumber" type="text" class="form-control border-0" placeholder="52934 3849 9384 8347" required>
+                    <input @bind-value="ccr.CardNumber" type="text" class="form-control border-0" placeholder="52934 3849 9384 8347" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6 ">
                         <label asp-for="cardExpiryMonth" class="pl-2"><strong>Card Expiry Month</strong> </label>
                         <br>
-                        <input asp-for="cardExpiryMonth" type="text" class="form-control border-0" placeholder="09" required>
+                        <input @bind-value="ccr.cardExpiryMonth" type="text" class="form-control border-0" placeholder="09" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="cardExpiryYear" class="pl-2"><strong>Card Expiry Year</strong> </label>
                         <br>
-                        <input asp-for="cardExpiryYear" type="text" class="form-control border-0" placeholder="28" required>
+                        <input @bind-value="ccr.cardExpiryYear" type="text" class="form-control border-0" placeholder="28" required>
                     </div>
                 </div>
                 <div class="form-group  pl-2 py-2">
                     <label for="" class="pl-2"><strong>CVV</strong> </label>
                     <br>
-                    <input asp-for="cardCvv" autocomplete="off" type="text" class="form-control border-0" placeholder="554" required>
+                    <input @bind-value="ccr.cardCvv" autocomplete="off" type="text" class="form-control border-0" placeholder="554" required>
                 </div>
                 <div class="form-group pl-2 py-2">
                     <label for="" class="pl-2"><strong>Pin</strong> </label>
                     <br>
-                    <input asp-for="pin" type="password" autocomplete="off" class="form-control border-0" placeholder="1111">
+                    <input @bind-value="ccr.pin" type="password" autocomplete="off" class="form-control border-0" placeholder="1111">
                 </div>
                 @if (hasOtp == 1)
                 {
@@ -62,13 +62,13 @@
 </div>
 
 @code {
-    CCRequest chargeRequest = new CCRequest();
+    CCRequest ccr = new CCRequest();
     public string Otp { get; set; }
     public int hasOtp { get; set; } = 0;
 
     private void Charge()
     {
-        var response = _meterService.ChargeUserCard(chargeRequest).Result;
+        var response = _meterService.ChargeUserCard(ccr).Result;
         if (response.Status)
         {
             if (response.Data.data.status == "send_otp")

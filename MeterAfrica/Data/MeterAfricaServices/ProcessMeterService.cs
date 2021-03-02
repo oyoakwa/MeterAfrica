@@ -48,7 +48,9 @@ namespace MeterAfrica.Data.MeterAfricaServices
         {
             try
             {
-                var response = await _http.PostAsync<ValidateMeterResponseRoot>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/validate-meter");
+                // var response = await _http.PostAsync<ValidateMeterResponseRoot>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/validate-meter");
+                ValidateMeterNumberService vms = new ValidateMeterNumberService(_responseService, _http);
+                var response = vms.ValidateMeterNo(req).Result.Data;
                 if (response.status)
                 {
                     return _responseService.SuccessResponse<ValidateMeterResponseRoot>("Yes! Meter is valid", response);
