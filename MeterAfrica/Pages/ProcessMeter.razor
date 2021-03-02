@@ -105,8 +105,8 @@
     //45028963390
     public async Task ValidateMeter()
     {
-        sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount)).Wait();
-        sessionStorage.SetItemAsync("Email", Convert.ToString(meter.customerEmail)).Wait();
+        await sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount));
+        await sessionStorage.SetItemAsync("Email", Convert.ToString(meter.customerEmail));
 
         var response = await _meterService.ValidateMeter(meter);
         if (response.Status)
