@@ -3,8 +3,10 @@
 
 
 @using MeterAfrica.Data
-@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
 
+@inject NavigationManager NavManager
+@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 
 <div class="container">
@@ -17,10 +19,10 @@
             <div class='text-center payment-details text-white py-3 my-3'>
                 PAYMENT DETAILS
             </div>
-            <EditForm Model="@meter" OnValidSubmit="ValidateMeter" >
+            <EditForm Model="@meter" OnValidSubmit="ValidateMeter">
                 <div class="form-group px-2 py-2">
                     <label class='pl-2 mb-0'><strong>Merchant</strong> </label>
-                    <select @bind="meter.discoRef"  class='form-control border-0'>
+                    <select @bind="meter.discoRef" class='form-control border-0'>
                         <option selected="selected" value="5">Select Merchant</option>
                         @foreach (var item in GetIDiscoObjects)
                         {
@@ -30,23 +32,23 @@
                 </div>
                 <div class="form-group px-2 py-2">
                     <label class="pl-2 mb-0"><strong>Meter Number</strong> </label>
-                    <input type="text" @bind-value="meter.meterRef" class="form-control border-0"  >
+                    <input type="text" @bind-value="meter.meterRef" class="form-control border-0">
                 </div>
 
                 <div class="form-group pl-2 py-2">
                     <label class="pl-2"><strong>Phone Number</strong> </label>
 
-                    <input type="text" class="form-control border-0" @bind-value="meter.customerPhone" placeholder="Enter your phone number" >
+                    <input type="text" class="form-control border-0" @bind-value="meter.customerPhone" placeholder="Enter your phone number">
                 </div>
                 <div class="form-group pl-2 py-2">
                     <label class="pl-2"><strong>Email Address</strong> </label>
 
-                    <input type="email" @bind-value="meter.customerEmail" class="form-control border-0" placeholder="Enter Mail" >
+                    <input type="email" @bind-value="meter.customerEmail" class="form-control border-0" placeholder="Enter Mail">
                 </div>
                 <div class="form-group pl-2 py-2">
                     <label class="pl-2"><strong>Amount</strong> </label>
 
-                    <input type="number" @bind-value="meter.amount" class="form-control border-0" placeholder="Amount Of power in naira" >
+                    <input type="number" @bind-value="meter.amount" class="form-control border-0" placeholder="Amount Of power in naira">
                 </div>
                 <div class="form-group pl-2 py-2">
                     <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Proceed to Start Payment</text></button>
@@ -71,8 +73,8 @@
     {
         try
         {
-
-            var res =  _meterService.GetDiscos();
+            //sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount)).Wait();
+            var res = _meterService.GetDiscos();
             if (res.status)
             {
                 List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
@@ -106,7 +108,7 @@
         var response = await _meterService.ValidateMeter(meter);
         if (response.Status)
         {
-
+            NavManager.NavigateTo("/charge");
         }
     }
 

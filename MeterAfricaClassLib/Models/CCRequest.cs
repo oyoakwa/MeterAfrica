@@ -25,5 +25,6 @@ namespace MeterAfricaClassLib.Models
 
         [Required]
         public string pin { get; set; }
+
     }
 }

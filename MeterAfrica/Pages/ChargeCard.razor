@@ -1,18 +1,23 @@
-﻿
+﻿@page "/charge"
 
+@using MeterAfricaClassLib.Models
 
-@*<div class="container">
+@inject NavigationManager NavManager
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
+
+<div class="container">
     <div class="paye">
         <div class="pay-info p-5">
             <div class="clearfix">
-                <span class="pull-left"><text style="color:orangered">@ViewBag.ErrorMsg</text></span>
-                <span class="pull-right"><strong>₦@ViewBag.Amount</strong></span>
+                <span class="pull-left"><text style="color:orangered"></text></span>
+                <span class="pull-right"><strong>₦</strong></span>
             </div>
             <div class="text-center payment-details text-white py-3 my-3">
                 PAYMENT DETAILS
             </div>
 
-            <form asp-controller="Charge" asp-action="ChargeCard">
+            <EditForm Model="@chargeRequest">
                 <div class="form-group  pl-2 py-2">
                     <label for="" class="pl-2"><strong>Card Number</strong> </label>
                     <br>
@@ -40,22 +45,50 @@
                     <br>
                     <input asp-for="pin" type="password" autocomplete="off" class="form-control border-0" placeholder="1111">
                 </div>
-                @if (ViewBag.otp == "Yes")
+                @if (hasOtp == 1)
                 {
                     <div class="form-group pl-2 py-2">
                         <label for="" class="pl-2"><strong>Otp</strong> </label>
                         <br>
-                        <input name="otp" type="text" class="form-control border-0" placeholder="Please Put OTP Code">
+                        <input @bind="@Otp" class="form-control border-0" placeholder="Please Put OTP Code">
                     </div>
                 }
                 <div class="form-group pl-2 py-2">
-                    <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Make ₦@ViewBag.Amount Payment</text></button>
+                    <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Make ₦ Payment</text></button>
                 </div>
-            </form>
+            </EditForm>
         </div>
     </div>
 </div>
 
 @code {
+    CCRequest chargeRequest = new CCRequest();
+    public string Otp { get; set; }
+    public int hasOtp { get; set; } = 0;
 
-}*@
+    private void Charge()
+    {
+        var response = _meterService.ChargeUserCard(chargeRequest).Result;
+        if (response.Status)
+        {
+            if (response.Data.data.status == "send_otp")
+            {
+                var otrobj = new OtpRequest()
+                {
+                    Otp = Otp,
+                    refe = response.Data.data.reference
+                };
+                hasOtp = 1;
+                var payWithOtp = _meterService.ChargeWithOtp(otrobj).Result;
+
+                if (payWithOtp.Status)
+                {
+                    NavManager.NavigateTo("");
+                }
+            }
+        }
+
+
+    }
+
+}

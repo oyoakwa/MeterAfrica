@@ -27,7 +27,6 @@ namespace MeterAfrica.Data.MeterAfricaServices
                 //GetDiscoService gds = new GetDiscoService(_responseService,_http); gds.GetDiscos().Result; //
                 var response = _http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, url: "/api/processtoken/get-discos").Result;
 
-
                 if (response.status)
                 {
                     return response;
@@ -44,7 +43,7 @@ namespace MeterAfrica.Data.MeterAfricaServices
             }
 
         }
-
+       
         public async Task<ServiceResponseModel<ValidateMeterResponseRoot>> ValidateMeter(MeterValidateReq req)
         {
             try
@@ -63,6 +62,51 @@ namespace MeterAfrica.Data.MeterAfricaServices
             {
 
                 throw;
+            }
+        }
+
+
+        public async Task<ServiceResponseModel<CCResponse>> ChargeUserCard(CCRequest req)
+        {
+            try
+            {
+                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/charge/card");
+
+                if (response.status)
+                {
+                    return _responseService.SuccessResponse<CCResponse>("Success! card Charged", response);
+                }
+                else
+                {
+                    return _responseService.ErroResponse<CCResponse>("Unabe to charge card");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<ServiceResponseModel<CCResponse>> ChargeWithOtp(OtpRequest req)
+        {
+            try
+            {
+                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/charge/otp");
+
+                if (response.status)
+                {
+                    return _responseService.SuccessResponse<CCResponse>("Success! card Charged", response);
+                }
+                else
+                {
+                    return _responseService.ErroResponse<CCResponse>("Unabe to charge card");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
