@@ -38,8 +38,10 @@ namespace MeterAfrica
             services.AddScoped<IBaseHttpClient, BaseHttpClient>();
             
 
+
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<AppSettings>());
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<StaticAppSettings>());
+            services.AddScoped<UIStoreEntity>();
             services.AddHttpClient();
         }
 

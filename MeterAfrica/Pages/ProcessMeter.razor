@@ -5,6 +5,7 @@
 @using MeterAfrica.Data
 
 @inject NavigationManager NavManager
+@inject Data.UIStoreEntity store;
 @inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
@@ -105,10 +106,14 @@
     //45028963390
     public async Task ValidateMeter()
     {
-        sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount)).Wait();
-        sessionStorage.SetItemAsync("Email", Convert.ToString(meter.customerEmail)).Wait();
+        store.Amount = meter.amount;
+        store.Email = meter.customerEmail;
+
+
 
         var response = await _meterService.ValidateMeter(meter);
+        store.TransToken = response.Data.data.transactionRef;
+        
         if (response.Status)
         {
             NavManager.NavigateTo("/charge");

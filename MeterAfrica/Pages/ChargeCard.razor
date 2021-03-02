@@ -1,7 +1,10 @@
 ﻿@page "/charge"
+@layout MeterAfrica.Shared.TokenLayout
 
 @using MeterAfricaClassLib.Models
+@using MeterAfrica.Data
 
+@inject MeterAfrica.Data.UIStoreEntity store
 @inject NavigationManager NavManager
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
@@ -17,7 +20,7 @@
                 PAYMENT DETAILS
             </div>
 
-            <EditForm Model="@ccr">
+            <EditForm Model="@ccr" OnValidSubmit="Charge">
                 <div class="form-group  pl-2 py-2">
                     <label for="" class="pl-2"><strong>Card Number</strong> </label>
                     <br>
@@ -66,14 +69,16 @@
     public string Otp { get; set; }
     public int hasOtp { get; set; } = 0;
 
-    private void Charge()
+    private async Task Charge()
     {
-        ccr.Amount = sessionStorage.GetItemAsync<string>("Amount").Result;
-        ccr.Email = sessionStorage.GetItemAsync<string>("Email").Result; ;
+        ccr.Amount = store.Amount;
+        ccr.Email = store.Email;
 
         var response = _meterService.ChargeUserCard(ccr).Result;
         if (response.Status)
         {
+            store.PaymentTransRef = response.Data.data.reference;
+            
             if (response.Data.data.status == "send_otp")
             {
                 var otrobj = new OtpRequest()
@@ -86,11 +91,11 @@
 
                 if (payWithOtp.Status)
                 {
-                    NavManager.NavigateTo("");
+                    NavManager.NavigateTo("/token");
                 }
             }
+            NavManager.NavigateTo("/token");
         }
-
 
     }
 
