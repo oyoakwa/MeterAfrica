@@ -6,7 +6,7 @@
 
 @inject NavigationManager NavManager
 @inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
-
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 
 <div class="container">
@@ -14,7 +14,7 @@
         <div class="pay-info p-5">
             <div class="clearfix">
                 <span class="pull-left"> <text style="color:orangered"></text></span>
-                <span class="pull-right"> <strong>₦00:00</strong> </span>
+                <span class="pull-right"> <strong>₦@meter.amount</strong> </span>
             </div>
             <div class='text-center payment-details text-white py-3 my-3'>
                 PAYMENT DETAILS
@@ -73,7 +73,7 @@
     {
         try
         {
-            //sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount)).Wait();
+
             var res = _meterService.GetDiscos();
             if (res.status)
             {
@@ -105,6 +105,9 @@
     //45028963390
     public async Task ValidateMeter()
     {
+        sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount)).Wait();
+        sessionStorage.SetItemAsync("Email", Convert.ToString(meter.customerEmail)).Wait();
+
         var response = await _meterService.ValidateMeter(meter);
         if (response.Status)
         {

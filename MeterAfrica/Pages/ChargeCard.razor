@@ -68,6 +68,9 @@
 
     private void Charge()
     {
+        ccr.Amount = sessionStorage.GetItemAsync<string>("Amount").Result;
+        ccr.Email = sessionStorage.GetItemAsync<string>("Email").Result; ;
+
         var response = _meterService.ChargeUserCard(ccr).Result;
         if (response.Status)
         {
