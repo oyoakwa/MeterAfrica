@@ -13,6 +13,7 @@ using MeterAfrica.Data;
 using MeterAfricaClassLib.Services;
 using MeterAfricaClassLibrary.Utilities;
 using MeterAfrica.Data.MeterAfricaServices;
+using Blazored.SessionStorage;
 
 namespace MeterAfrica
 {
@@ -31,6 +32,7 @@ namespace MeterAfrica
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazoredSessionStorage();
             services.AddTransient<ProcessMeterService>();
             services.AddScoped<IResponseService, ResponseService>();
             services.AddScoped<IBaseHttpClient, BaseHttpClient>();

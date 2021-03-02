@@ -5,53 +5,50 @@ using System.Threading.Tasks;
 using MeterAfricaClassLib.Models;
 using MeterAfricaClassLib.Services.MeterAfricaServices;
 using MeterAfricaClassLib.Services.PayStackService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace MeterAfricaApi.Controllers
 {
-    [Route("api/processtoken")]
+    [Route("api/charge")]
     [ApiController]
-    public class ProcessTokenController : ControllerBase
+    public class ChargeController : ControllerBase
     {
+
         private readonly IGetDiscoService _discoService;
         private readonly IValidateMeterNumberService _validateMeter;
         private readonly IConfiguration _configuration;
-        
-
-        public ProcessTokenController(IGetDiscoService discoService, IValidateMeterNumberService validateMeter, PayServices pay)
+        private readonly PayServices _pay;
+        public ChargeController(IGetDiscoService discoService, IValidateMeterNumberService validateMeter, PayServices pay)
         {
             _discoService = discoService
                 ?? throw new ArgumentNullException(nameof(discoService));
             _validateMeter = validateMeter
                 ?? throw new ArgumentNullException(nameof(validateMeter));
+            _pay = pay
+                ?? throw new ArgumentNullException(nameof(pay));
         }
-        
-        [HttpGet("get-discos")]
-        public async Task<ActionResult<DiscoResponse>> GetDisco()
+
+        [HttpPost("charge/card")]
+        public async Task<ActionResult<CCResponse>> ProcessCharge(CCRequest request, string otp = null)
         {
-            try
+            var response = await _pay.ChargeCard(request);
+            if (!response.status)
             {
-                var res = await _discoService.GetDiscos();
-                var responseData = res.Data;
-                return Ok(responseData);
-
+                return Ok(response);
             }
-            catch(Exception ex)
+            else
             {
-                throw ex;
+                return null;
             }
-            
         }
 
-        [HttpPost("Validate-meter")]
-        [ProducesResponseType(type: typeof(ServiceResponseModel<ValidateMeterResponseRoot>), statusCode: 200)]
-        public async Task<IActionResult> ValidateMeter(MeterValidateReq req)
+        [HttpPost("charge/{otp}")]
+        public async Task<ActionResult<CCResponse>> ProcessCharge(OtpRequest req)
         {
-            var response = await _validateMeter.ValidateMeterNo(req);
-            return Ok(response);
+            var response = await _pay.SendOtp(req.refe, req.Otp);
+            return response;
         }
-
-        
     }
 }

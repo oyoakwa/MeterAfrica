@@ -20,13 +20,12 @@ namespace MeterAfrica.Data.MeterAfricaServices
                 ?? throw new ArgumentNullException(nameof(responseService));
         }
 
-        public DiscoResponse GetDiscos()
+        public DiscoResponse GetDiscos()    
         {
             try
             {
-                //GetDiscoService gds = new GetDiscoService(_responseService,_http); gds.GetDiscos().Result; //
-                var response = _http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, url: "/api/processtoken/get-discos").Result;
-
+                GetDiscoService gds = new GetDiscoService(_responseService,_http); 
+                var response = gds.GetDiscos().Result.Data; //_http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, url: "/api/processtoken/get-discos").Result;
 
                 if (response.status)
                 {
@@ -44,12 +43,14 @@ namespace MeterAfrica.Data.MeterAfricaServices
             }
 
         }
-
+       
         public async Task<ServiceResponseModel<ValidateMeterResponseRoot>> ValidateMeter(MeterValidateReq req)
         {
             try
             {
-                var response = await _http.PostAsync<ValidateMeterResponseRoot>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/validate-meter");
+                // var response = await _http.PostAsync<ValidateMeterResponseRoot>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/validate-meter");
+                ValidateMeterNumberService vms = new ValidateMeterNumberService(_responseService, _http);
+                var response = vms.ValidateMeterNo(req).Result.Data;
                 if (response.status)
                 {
                     return _responseService.SuccessResponse<ValidateMeterResponseRoot>("Yes! Meter is valid", response);
@@ -63,6 +64,51 @@ namespace MeterAfrica.Data.MeterAfricaServices
             {
 
                 throw;
+            }
+        }
+
+
+        public async Task<ServiceResponseModel<CCResponse>> ChargeUserCard(CCRequest req)
+        {
+            try
+            {
+                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/charge/charge/card");
+
+                if (response.status)
+                {
+                    return _responseService.SuccessResponse<CCResponse>("Success! card Charged", response);
+                }
+                else
+                {
+                    return _responseService.ErroResponse<CCResponse>("Unabe to charge card");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<ServiceResponseModel<CCResponse>> ChargeWithOtp(OtpRequest req)
+        {
+            try
+            {
+                var response = await _http.PostAsync<CCResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: $"/api/charge/charge/{req.Otp}");
+
+                if (response.status)
+                {
+                    return _responseService.SuccessResponse<CCResponse>("Success! card Charged", response);
+                }
+                else
+                {
+                    return _responseService.ErroResponse<CCResponse>("Unabe to charge card");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

@@ -1,61 +1,97 @@
-﻿
+﻿@page "/charge"
 
+@using MeterAfricaClassLib.Models
 
-@*<div class="container">
+@inject NavigationManager NavManager
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
+
+<div class="container">
     <div class="paye">
         <div class="pay-info p-5">
             <div class="clearfix">
-                <span class="pull-left"><text style="color:orangered">@ViewBag.ErrorMsg</text></span>
-                <span class="pull-right"><strong>₦@ViewBag.Amount</strong></span>
+                <span class="pull-left"><text style="color:orangered"></text></span>
+                <span class="pull-right"><strong>₦</strong></span>
             </div>
             <div class="text-center payment-details text-white py-3 my-3">
                 PAYMENT DETAILS
             </div>
 
-            <form asp-controller="Charge" asp-action="ChargeCard">
+            <EditForm Model="@ccr">
                 <div class="form-group  pl-2 py-2">
                     <label for="" class="pl-2"><strong>Card Number</strong> </label>
                     <br>
-                    <input asp-for="CardNumber" type="text" class="form-control border-0" placeholder="52934 3849 9384 8347" required>
+                    <input @bind-value="ccr.CardNumber" type="text" class="form-control border-0" placeholder="52934 3849 9384 8347" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6 ">
                         <label asp-for="cardExpiryMonth" class="pl-2"><strong>Card Expiry Month</strong> </label>
                         <br>
-                        <input asp-for="cardExpiryMonth" type="text" class="form-control border-0" placeholder="09" required>
+                        <input @bind-value="ccr.cardExpiryMonth" type="text" class="form-control border-0" placeholder="09" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="cardExpiryYear" class="pl-2"><strong>Card Expiry Year</strong> </label>
                         <br>
-                        <input asp-for="cardExpiryYear" type="text" class="form-control border-0" placeholder="28" required>
+                        <input @bind-value="ccr.cardExpiryYear" type="text" class="form-control border-0" placeholder="28" required>
                     </div>
                 </div>
                 <div class="form-group  pl-2 py-2">
                     <label for="" class="pl-2"><strong>CVV</strong> </label>
                     <br>
-                    <input asp-for="cardCvv" autocomplete="off" type="text" class="form-control border-0" placeholder="554" required>
+                    <input @bind-value="ccr.cardCvv" autocomplete="off" type="text" class="form-control border-0" placeholder="554" required>
                 </div>
                 <div class="form-group pl-2 py-2">
                     <label for="" class="pl-2"><strong>Pin</strong> </label>
                     <br>
-                    <input asp-for="pin" type="password" autocomplete="off" class="form-control border-0" placeholder="1111">
+                    <input @bind-value="ccr.pin" type="password" autocomplete="off" class="form-control border-0" placeholder="1111">
                 </div>
-                @if (ViewBag.otp == "Yes")
+                @if (hasOtp == 1)
                 {
                     <div class="form-group pl-2 py-2">
                         <label for="" class="pl-2"><strong>Otp</strong> </label>
                         <br>
-                        <input name="otp" type="text" class="form-control border-0" placeholder="Please Put OTP Code">
+                        <input @bind="@Otp" class="form-control border-0" placeholder="Please Put OTP Code">
                     </div>
                 }
                 <div class="form-group pl-2 py-2">
-                    <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Make ₦@ViewBag.Amount Payment</text></button>
+                    <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Make ₦ Payment</text></button>
                 </div>
-            </form>
+            </EditForm>
         </div>
     </div>
 </div>
 
 @code {
+    CCRequest ccr = new CCRequest();
+    public string Otp { get; set; }
+    public int hasOtp { get; set; } = 0;
 
-}*@
+    private void Charge()
+    {
+        ccr.Amount = sessionStorage.GetItemAsync<string>("Amount").Result;
+        ccr.Email = sessionStorage.GetItemAsync<string>("Email").Result; ;
+
+        var response = _meterService.ChargeUserCard(ccr).Result;
+        if (response.Status)
+        {
+            if (response.Data.data.status == "send_otp")
+            {
+                var otrobj = new OtpRequest()
+                {
+                    Otp = Otp,
+                    refe = response.Data.data.reference
+                };
+                hasOtp = 1;
+                var payWithOtp = _meterService.ChargeWithOtp(otrobj).Result;
+
+                if (payWithOtp.Status)
+                {
+                    NavManager.NavigateTo("");
+                }
+            }
+        }
+
+
+    }
+
+}

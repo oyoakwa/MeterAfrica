@@ -40,7 +40,7 @@ namespace MeterAfricaClassLibrary.Utilities
 
             var _url = $"{baseUrl}{url}";
             var request = new HttpRequestMessage(HttpMethod.Get, _url);
-            using var httpResponse =  client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result;
+            using var httpResponse =  client.SendAsync(request, HttpCompletionOption.ResponseContentRead).Result;
            // _logger.LogCritical(Utilities.SerializeToJson(httpResponse));
             returnValue = await Utilities.DeserializeRequestAsync<T>(httpResponse);
 
