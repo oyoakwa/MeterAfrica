@@ -24,8 +24,8 @@ namespace MeterAfrica.Data.MeterAfricaServices
         {
             try
             {
-                //GetDiscoService gds = new GetDiscoService(_responseService,_http); gds.GetDiscos().Result; //
-                var response = _http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, url: "/api/processtoken/get-discos").Result;
+                GetDiscoService gds = new GetDiscoService(_responseService,_http); 
+                var response = gds.GetDiscos().Result.Data; //_http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, url: "/api/processtoken/get-discos").Result;
 
                 if (response.status)
                 {
