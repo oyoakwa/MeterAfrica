@@ -36,7 +36,7 @@ public class ValidateMeterNumberService : IValidateMeterNumberService
                 return _responseService.ErroResponse<ValidateMeterResponseRoot>("Mater is invalid");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
 
             throw;

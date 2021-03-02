@@ -4,6 +4,7 @@ using System.Text;
 
 public class StaticAppSettings
 {
+    public static string MeterAfBaseUrl { get; set; }
     public static string MeterNgBaseUrl { get; set; }
     public static string MerchantKey { get; set; }
 }

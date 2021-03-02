@@ -30,3 +30,4 @@ C:\Dev\WebDev\MeterAfrica\MeterAfricaApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json
 C:\Dev\WebDev\MeterAfrica\MeterAfricaApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Dev\WebDev\MeterAfrica\MeterAfricaApi\obj\Debug\netcoreapp3.1\MeterAfricaApi.csproj.CoreCompileInputs.cache
 C:\Dev\WebDev\MeterAfrica\MeterAfricaApi\obj\Debug\netcoreapp3.1\MeterAfricaApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Dev\WebDev\MeterAfrica\MeterAfricaApi\bin\Debug\netcoreapp3.1\PayStack.Net.dll

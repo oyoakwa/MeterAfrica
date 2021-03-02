@@ -20,6 +20,8 @@ namespace MeterAfricaApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //webBuilder.UseKestrel((p) => p.AddServerHeader = false);
+                    //webBuilder.UseUrls("https://*:44343/");
                     webBuilder.UseStartup<Startup>();
                 });
     }

@@ -1,4 +1,6 @@
-﻿using MeterAfricaClassLib.Services;
+﻿using MeterAfricaClassLib.Models;
+using MeterAfricaClassLib.Services;
+using MeterAfricaClassLib.Services.MeterAfricaServices;
 using MeterAfricaClassLibrary.Utilities;
 using System;
 using System.Collections.Generic;
@@ -18,20 +20,27 @@ namespace MeterAfrica.Data.MeterAfricaServices
                 ?? throw new ArgumentNullException(nameof(responseService));
         }
 
-        public async Task<ServiceResponseModel<DiscoResponse>> GetDiscos()
+        public DiscoResponse GetDiscos()
         {
             try
             {
-                var response = await _http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterNgBaseUrl, url: "/api/processtoken/get-discos");
+                //GetDiscoService gds = new GetDiscoService(_responseService,_http); gds.GetDiscos().Result; //
+                var response = _http.GetAsync<DiscoResponse>(baseUrl: StaticAppSettings.MeterAfBaseUrl, url: "/api/processtoken/get-discos").Result;
+
 
                 if (response.status)
-                    return _responseService.SuccessResponse<DiscoResponse>("Discos Retrived Sucessfully", response);
+                {
+                    return response;
+                }
                 else
-                    return _responseService.ErroResponse<DiscoResponse>("Discos Retrival Fail");
+                {
+                    return null;
+                }
+                    
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }
@@ -40,7 +49,7 @@ namespace MeterAfrica.Data.MeterAfricaServices
         {
             try
             {
-                var response = await _http.PostAsync<ValidateMeterResponseRoot>(baseUrl: StaticAppSettings.MeterNgBaseUrl, postdata: req, url: "/api/processtoken/validate-meter");
+                var response = await _http.PostAsync<ValidateMeterResponseRoot>(baseUrl: StaticAppSettings.MeterAfBaseUrl, postdata: req, url: "/api/processtoken/validate-meter");
                 if (response.status)
                 {
                     return _responseService.SuccessResponse<ValidateMeterResponseRoot>("Yes! Meter is valid", response);
@@ -50,7 +59,7 @@ namespace MeterAfrica.Data.MeterAfricaServices
                     return _responseService.ErroResponse<ValidateMeterResponseRoot>("Mater is invalid");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

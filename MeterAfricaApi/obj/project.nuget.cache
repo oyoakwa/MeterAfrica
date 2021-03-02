@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9iiNHxfdVBdxeN45rDTFq9NRkSb/TCcehRCgNEpoK5GiX8+xq9PnjgwhhDvbRFsVcVT1VGcuRPQMnuGN9Z6PyA==",
+  "dgSpecHash": "HFf9eP/rZpQQRXCU7SgQhm18wmLO+p10SZPf583AcFqzx0F0thBZ4QmsutWVNej/XE43PPjROLgXx3yOIzPbRw==",
   "success": true,
   "projectFilePath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaApi\\MeterAfricaApi.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,7 @@
     "C:\\Users\\OYO AKWA\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.0\\microsoft.extensions.primitives.3.1.0.nupkg.sha512",
     "C:\\Users\\OYO AKWA\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\OYO AKWA\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\OYO AKWA\\.nuget\\packages\\paystack.net\\0.7.7\\paystack.net.0.7.7.nupkg.sha512",
     "C:\\Users\\OYO AKWA\\.nuget\\packages\\system.collections.immutable\\1.7.0\\system.collections.immutable.1.7.0.nupkg.sha512",
     "C:\\Users\\OYO AKWA\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\OYO AKWA\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.0\\system.diagnostics.diagnosticsource.4.7.0.nupkg.sha512"

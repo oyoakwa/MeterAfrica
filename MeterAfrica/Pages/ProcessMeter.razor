@@ -22,7 +22,7 @@
                     <label class='pl-2 mb-0'><strong>Merchant</strong> </label>
                     <select @bind="meter.discoRef"  class='form-control border-0'>
                         <option selected="selected" value="5">Select Merchant</option>
-                        @foreach (var item in GetDiscos().Result)
+                        @foreach (var item in GetIDiscoObjects)
                         {
                             <option value="@item.Ref">@item.Name</option>
                         }
@@ -60,20 +60,38 @@
 
     private MeterValidateReq meter = new MeterValidateReq();
 
-    public async Task<List<UIDiscoObject>> GetDiscos()
+    private List<UIDiscoObject> GetIDiscoObjects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetIDiscoObjects = GetDiscos();
+    }
+
+    public List<UIDiscoObject> GetDiscos()
     {
         try
         {
-            List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
-            var res = await _meterService.GetDiscos();
-            foreach (var data in res.Data.data)
+
+            var res =  _meterService.GetDiscos();
+            if (res.status)
             {
-                UIDiscoObject s = new UIDiscoObject();
-                s.Ref = data.reference;
-                s.Name = data.name;
-                objDisco.Add(s);
+                List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
+                foreach (var data in res.data)
+                {
+                    UIDiscoObject s = new UIDiscoObject();
+                    s.Ref = data.reference;
+                    s.Name = data.name;
+                    objDisco.Add(s);
+                }
+                return objDisco;
             }
-            return objDisco;
+            else
+            {
+                return null;
+
+                // Show Error Notification
+            }
+
         }
         catch (Exception ex)
         {
@@ -81,9 +99,15 @@
         }
     }
 
+
+    //45028963390
     public async Task ValidateMeter()
     {
+        var response = await _meterService.ValidateMeter(meter);
+        if (response.Status)
+        {
 
+        }
     }
 
 

@@ -30,6 +30,8 @@ namespace MeterAfricaClassLibrary.Utilities
             T returnValue;
 
             var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("Merchant-Key", StaticAppSettings.MerchantKey);
             if (!string.IsNullOrEmpty(apikey))
                 client.DefaultRequestHeaders.Add("api-key", apikey);
@@ -38,8 +40,8 @@ namespace MeterAfricaClassLibrary.Utilities
 
             var _url = $"{baseUrl}{url}";
             var request = new HttpRequestMessage(HttpMethod.Get, _url);
-            using var httpResponse = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            _logger.LogCritical(Utilities.SerializeToJson(httpResponse));
+            using var httpResponse =  client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result;
+           // _logger.LogCritical(Utilities.SerializeToJson(httpResponse));
             returnValue = await Utilities.DeserializeRequestAsync<T>(httpResponse);
 
             return returnValue;
@@ -61,7 +63,7 @@ namespace MeterAfricaClassLibrary.Utilities
             var request = new HttpRequestMessage(HttpMethod.Post, _url);
             var jsonContent = Utilities.SerializeToJson(postdata);
             request.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            using var httpResponse = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            using var httpResponse = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result;
 
             returnValue = await Utilities.DeserializeRequestAsync<T>(httpResponse);
             return returnValue;

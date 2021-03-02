@@ -1,0 +1,61 @@
+﻿
+
+
+@*<div class="container">
+    <div class="paye">
+        <div class="pay-info p-5">
+            <div class="clearfix">
+                <span class="pull-left"><text style="color:orangered">@ViewBag.ErrorMsg</text></span>
+                <span class="pull-right"><strong>₦@ViewBag.Amount</strong></span>
+            </div>
+            <div class="text-center payment-details text-white py-3 my-3">
+                PAYMENT DETAILS
+            </div>
+
+            <form asp-controller="Charge" asp-action="ChargeCard">
+                <div class="form-group  pl-2 py-2">
+                    <label for="" class="pl-2"><strong>Card Number</strong> </label>
+                    <br>
+                    <input asp-for="CardNumber" type="text" class="form-control border-0" placeholder="52934 3849 9384 8347" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 ">
+                        <label asp-for="cardExpiryMonth" class="pl-2"><strong>Card Expiry Month</strong> </label>
+                        <br>
+                        <input asp-for="cardExpiryMonth" type="text" class="form-control border-0" placeholder="09" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="cardExpiryYear" class="pl-2"><strong>Card Expiry Year</strong> </label>
+                        <br>
+                        <input asp-for="cardExpiryYear" type="text" class="form-control border-0" placeholder="28" required>
+                    </div>
+                </div>
+                <div class="form-group  pl-2 py-2">
+                    <label for="" class="pl-2"><strong>CVV</strong> </label>
+                    <br>
+                    <input asp-for="cardCvv" autocomplete="off" type="text" class="form-control border-0" placeholder="554" required>
+                </div>
+                <div class="form-group pl-2 py-2">
+                    <label for="" class="pl-2"><strong>Pin</strong> </label>
+                    <br>
+                    <input asp-for="pin" type="password" autocomplete="off" class="form-control border-0" placeholder="1111">
+                </div>
+                @if (ViewBag.otp == "Yes")
+                {
+                    <div class="form-group pl-2 py-2">
+                        <label for="" class="pl-2"><strong>Otp</strong> </label>
+                        <br>
+                        <input name="otp" type="text" class="form-control border-0" placeholder="Please Put OTP Code">
+                    </div>
+                }
+                <div class="form-group pl-2 py-2">
+                    <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Make ₦@ViewBag.Amount Payment</text></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}*@

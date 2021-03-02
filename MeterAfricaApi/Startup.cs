@@ -25,33 +25,26 @@ namespace MeterAfricaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(setupAction =>
+            services.AddControllers()
+                .AddJsonOptions(options =>
             {
-                setupAction.ReturnHttpNotAcceptable = true;
-            }).AddXmlDataContractSerializerFormatters()
-                .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                options.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
             services.AddScoped<IGetDiscoService, GetDiscoService>();
             services.AddTransient<IBaseHttpClient, BaseHttpClient>();
-            services.AddTransient<IResponseService,ResponseService>();
+            services.AddScoped<IResponseService,ResponseService>();
             services.AddTransient<IValidateMeterNumberService, ValidateMeterNumberService>();
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<AppSettings>());
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<StaticAppSettings>());
-            services.AddHttpClient();
-
-            services.AddResponseCompression(options =>
+            services.AddCors(o => o.AddPolicy("MeterAfricaCLCors", builder =>
             {
-                options.MimeTypes = new[]
-             {
-                "text/plain",
-                "text/css",
-                "application/javascript",
-                "text/html",
-                "application/json",
-                "text/json"
-               };
-                options.EnableForHttps = true;
-            });
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

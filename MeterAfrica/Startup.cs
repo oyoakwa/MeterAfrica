@@ -31,10 +31,10 @@ namespace MeterAfrica
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<IResponseService, ResponseService>();
-            services.AddScoped<IBaseHttpClient, BaseHttpClient>();
             services.AddTransient<ProcessMeterService>();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<IResponseService, ResponseService>();
+            services.AddScoped<IBaseHttpClient, BaseHttpClient>();
+            
 
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<AppSettings>());
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<StaticAppSettings>());

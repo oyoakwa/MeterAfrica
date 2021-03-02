@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeterAfricaClassLib.Models;
 using MeterAfricaClassLib.Services.MeterAfricaServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,11 +24,20 @@ namespace MeterAfricaApi.Controllers
         }
         
         [HttpGet("get-discos")]
-        [ProducesResponseType(type: typeof(ServiceResponseModel<DiscoResponse>), statusCode: 200)]
-        public async Task<IActionResult> GetDisco()
+        public async Task<ActionResult<DiscoResponse>> GetDisco()
         {
-            var res = await _discoService.GetDiscos();
-            return Ok(res);
+            try
+            {
+                var res = await _discoService.GetDiscos();
+                var responseData = res.Data;
+                return Ok(responseData);
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         [HttpPost("Validate-meter")]
