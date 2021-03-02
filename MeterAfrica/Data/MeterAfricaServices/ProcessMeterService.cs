@@ -20,7 +20,7 @@ namespace MeterAfrica.Data.MeterAfricaServices
                 ?? throw new ArgumentNullException(nameof(responseService));
         }
 
-        public DiscoResponse GetDiscos()
+        public DiscoResponse GetDiscos()    
         {
             try
             {
