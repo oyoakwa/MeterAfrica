@@ -3,8 +3,10 @@
 
 
 @using MeterAfrica.Data
+@using Syncfusion.Blazor.Notifications
 
 @inject NavigationManager NavManager
+@inject Data.UIStoreEntity store;
 @inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
@@ -13,7 +15,7 @@
     <div class="paye" style="margin-bottom:30px">
         <div class="pay-info p-5">
             <div class="clearfix">
-                <span class="pull-left"> <text style="color:orangered"></text></span>
+                <span class="pull-left"> <text style="color:orangered"></text>@errorMsg</span>
                 <span class="pull-right"> <strong>₦@meter.amount</strong> </span>
             </div>
             <div class='text-center payment-details text-white py-3 my-3'>
@@ -54,14 +56,20 @@
                     <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Proceed to Start Payment</text></button>
                 </div>
             </EditForm>
+
+            <SfToast @ref="ToastObj" ID="toast_type">
+                <ToastPosition X="@ToastPosition"></ToastPosition>
+            </SfToast>
         </div>
     </div>
 </div>
 
 @code{
+    SfToast ToastObj;
+    private string ToastPosition = "center";
 
     private MeterValidateReq meter = new MeterValidateReq();
-
+    private string errorMsg { get; set; }
     private List<UIDiscoObject> GetIDiscoObjects;
 
     protected override async Task OnInitializedAsync()
@@ -105,13 +113,24 @@
     //45028963390
     public async Task ValidateMeter()
     {
-        await sessionStorage.SetItemAsync("Amount", Convert.ToString(meter.amount));
-        await sessionStorage.SetItemAsync("Email", Convert.ToString(meter.customerEmail));
+
+        store.Amount = meter.amount;
+        store.Email = meter.customerEmail;
 
         var response = await _meterService.ValidateMeter(meter);
+
+
         if (response.Status)
         {
+            store.TransToken = response.Data.data.transactionRef;
             NavManager.NavigateTo("/charge");
+        }
+        else
+        {
+            errorMsg = response.Message;
+            meter = new MeterValidateReq();
+            var toast = new ToastModel { Title = "Error!", Content = "Invalid Meter", CssClass = "e-toast-danger", Icon = "e-error toast-icons" };
+            await this.ToastObj.Show(toast);
         }
     }
 

@@ -20,8 +20,5 @@ public class AppSettings
 
     }
 
-    public string ProviderMerchantCode { get; set; }
-    public string MerchantCode { get; set; }
-    public string MemmcolLiveEndPoint { get; set; }
     public string PaystackSecretKey { get; set; }
 }

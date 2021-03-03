@@ -1,10 +1,12 @@
 ﻿using MeterAfricaClassLib.Models;
 using MeterAfricaClassLib.Utilities;
+using MeterAfricaClassLibrary.Utilities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using PayStack.Net;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,9 +15,13 @@ namespace MeterAfricaClassLib.Services.PayStackService
     public class PayServices
     {
         private readonly IConfiguration _configuration;
-        public PayServices(IConfiguration configuration)
+        private readonly AppSettings _appSettings;
+        
+
+        public PayServices(IConfiguration configuration, IBaseHttpClient http, IResponseService responseService)
         {
             _configuration = configuration;
+            
         }
 
         public async Task<CCResponse> ChargeCard(CCRequest request)
@@ -87,5 +93,45 @@ namespace MeterAfricaClassLib.Services.PayStackService
 
             return await Task.FromResult(mainResponse);
         }
+
+        public string MakePaystackRequest(string url, HttpMethod method, object model = null)
+        {
+            using (var client = new HttpClient())
+            {
+                var key = _configuration[Constants.PayStackKey];
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {key}");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+                var postData = JsonConvert.SerializeObject(model);
+                var request = new HttpRequestMessage(method, url)
+                {
+                    Content = new StringContent(model == null ? "" : JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json")
+                };
+
+
+                var getTask = client.SendAsync(request);
+                getTask.Wait();
+
+                var results = getTask.Result;
+                if (results.IsSuccessStatusCode)
+                {
+                    var result = getTask.Result.Content.ReadAsStringAsync().Result;
+                    var response = JsonConvert.DeserializeObject<PaystackResponse>(result);
+                    if (!response.Status)
+                    {
+                        throw new Exception(response.Message);
+                    }
+
+                    return result;
+                }
+                else
+                {
+                    var result = getTask.Result.Content.ReadAsStringAsync().Result;
+                    var response = JsonConvert.DeserializeObject<PaystackResponse>(result);
+                    throw new Exception(response.Message);
+                }
+            }
+        }
+
+        
     }
 }

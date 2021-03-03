@@ -81,3 +81,5 @@ C:\Dev\WebDev\MeterAfrica\MeterAfrica\obj\Debug\netcoreapp3.1\Razor\Pages\Proces
 C:\Dev\WebDev\MeterAfrica\MeterAfrica\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\ChargeCard.razor.g.cs
 C:\Dev\WebDev\MeterAfrica\MeterAfrica\obj\Debug\netcoreapp3.1\Razor\Pages\ChargeCard.razor.g.cs
 C:\Dev\WebDev\MeterAfrica\MeterAfrica\bin\Debug\netcoreapp3.1\PayStack.Net.dll
+C:\Dev\WebDev\MeterAfrica\MeterAfrica\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\GetToken.razor.g.cs
+C:\Dev\WebDev\MeterAfrica\MeterAfrica\obj\Debug\netcoreapp3.1\Razor\Pages\GetToken.razor.g.cs
