@@ -13,6 +13,8 @@ using MeterAfrica.Data;
 using MeterAfricaClassLib.Services;
 using MeterAfricaClassLibrary.Utilities;
 using MeterAfrica.Data.MeterAfricaServices;
+using Blazored.SessionStorage;
+using Syncfusion.Blazor;
 
 namespace MeterAfrica
 {
@@ -30,14 +32,18 @@ namespace MeterAfrica
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSyncfusionBlazor();
             services.AddServerSideBlazor();
-            services.AddTransient<IResponseService, ResponseService>();
-            services.AddScoped<IBaseHttpClient, BaseHttpClient>();
+            services.AddBlazoredSessionStorage();
             services.AddTransient<ProcessMeterService>();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<IResponseService, ResponseService>();
+            services.AddScoped<IBaseHttpClient, BaseHttpClient>();
+            
+
 
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<AppSettings>());
             services.AddSingleton(Configuration.GetSection("AppSettings").Get<StaticAppSettings>());
+            services.AddScoped<UIStoreEntity>();
             services.AddHttpClient();
         }
 

@@ -1,28 +1,32 @@
-﻿@page "/processmeter"
+﻿@page "/"
 @layout MeterAfrica.Shared.TokenLayout
 
 
 @using MeterAfrica.Data
-@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
+@using Syncfusion.Blazor.Notifications
 
+@inject NavigationManager NavManager
+@inject Data.UIStoreEntity store;
+@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 
 <div class="container">
     <div class="paye" style="margin-bottom:30px">
         <div class="pay-info p-5">
             <div class="clearfix">
-                <span class="pull-left"> <text style="color:orangered"></text></span>
-                <span class="pull-right"> <strong>₦00:00</strong> </span>
+                <span class="pull-left"> <text style="color:orangered"></text>@errorMsg</span>
+                <span class="pull-right"> <strong>₦@meter.amount</strong> </span>
             </div>
             <div class='text-center payment-details text-white py-3 my-3'>
                 PAYMENT DETAILS
             </div>
-            <EditForm Model="@meter" OnValidSubmit="ValidateMeter" >
+            <EditForm Model="@meter" OnValidSubmit="ValidateMeter">
                 <div class="form-group px-2 py-2">
                     <label class='pl-2 mb-0'><strong>Merchant</strong> </label>
-                    <select @bind="meter.discoRef"  class='form-control border-0'>
+                    <select @bind="meter.discoRef" class='form-control border-0'>
                         <option selected="selected" value="5">Select Merchant</option>
-                        @foreach (var item in GetDiscos().Result)
+                        @foreach (var item in GetIDiscoObjects)
                         {
                             <option value="@item.Ref">@item.Name</option>
                         }
@@ -30,50 +34,74 @@
                 </div>
                 <div class="form-group px-2 py-2">
                     <label class="pl-2 mb-0"><strong>Meter Number</strong> </label>
-                    <input type="text" @bind-value="meter.meterRef" class="form-control border-0"  >
+                    <input type="text" @bind-value="meter.meterRef" class="form-control border-0">
                 </div>
 
                 <div class="form-group pl-2 py-2">
                     <label class="pl-2"><strong>Phone Number</strong> </label>
 
-                    <input type="text" class="form-control border-0" @bind-value="meter.customerPhone" placeholder="Enter your phone number" >
+                    <input type="text" class="form-control border-0" @bind-value="meter.customerPhone" placeholder="Enter your phone number">
                 </div>
                 <div class="form-group pl-2 py-2">
                     <label class="pl-2"><strong>Email Address</strong> </label>
 
-                    <input type="email" @bind-value="meter.customerEmail" class="form-control border-0" placeholder="Enter Mail" >
+                    <input type="email" @bind-value="meter.customerEmail" class="form-control border-0" placeholder="Enter Mail">
                 </div>
                 <div class="form-group pl-2 py-2">
                     <label class="pl-2"><strong>Amount</strong> </label>
 
-                    <input type="number" @bind-value="meter.amount" class="form-control border-0" placeholder="Amount Of power in naira" >
+                    <input type="number" @bind-value="meter.amount" class="form-control border-0" placeholder="Amount Of power in naira">
                 </div>
                 <div class="form-group pl-2 py-2">
                     <button type="submit" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Proceed to Start Payment</text></button>
                 </div>
             </EditForm>
+
+            <SfToast @ref="ToastObj" ID="toast_type">
+                <ToastPosition X="@ToastPosition"></ToastPosition>
+            </SfToast>
         </div>
     </div>
 </div>
 
 @code{
+    SfToast ToastObj;
+    private string ToastPosition = "center";
 
     private MeterValidateReq meter = new MeterValidateReq();
+    private string errorMsg { get; set; }
+    private List<UIDiscoObject> GetIDiscoObjects;
 
-    public async Task<List<UIDiscoObject>> GetDiscos()
+    protected override async Task OnInitializedAsync()
+    {
+        GetIDiscoObjects = GetDiscos();
+    }
+
+    public List<UIDiscoObject> GetDiscos()
     {
         try
         {
-            List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
-            var res = await _meterService.GetDiscos();
-            foreach (var data in res.Data.data)
+
+            var res = _meterService.GetDiscos();
+            if (res.status)
             {
-                UIDiscoObject s = new UIDiscoObject();
-                s.Ref = data.reference;
-                s.Name = data.name;
-                objDisco.Add(s);
+                List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
+                foreach (var data in res.data)
+                {
+                    UIDiscoObject s = new UIDiscoObject();
+                    s.Ref = data.reference;
+                    s.Name = data.name;
+                    objDisco.Add(s);
+                }
+                return objDisco;
             }
-            return objDisco;
+            else
+            {
+                return null;
+
+                // Show Error Notification
+            }
+
         }
         catch (Exception ex)
         {
@@ -81,9 +109,29 @@
         }
     }
 
+
+    //45028963390
     public async Task ValidateMeter()
     {
 
+        store.Amount = meter.amount;
+        store.Email = meter.customerEmail;
+
+        var response = await _meterService.ValidateMeter(meter);
+
+
+        if (response.Status)
+        {
+            store.TransToken = response.Data.data.transactionRef;
+            NavManager.NavigateTo("/charge");
+        }
+        else
+        {
+            errorMsg = response.Message;
+            meter = new MeterValidateReq();
+            var toast = new ToastModel { Title = "Error!", Content = "Invalid Meter", CssClass = "e-toast-danger", Icon = "e-error toast-icons" };
+            await this.ToastObj.Show(toast);
+        }
     }
 
 

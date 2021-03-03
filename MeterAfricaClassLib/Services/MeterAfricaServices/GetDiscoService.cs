@@ -1,4 +1,5 @@
-﻿using MeterAfricaClassLibrary.Utilities;
+﻿using MeterAfricaClassLib.Models;
+using MeterAfricaClassLibrary.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +23,7 @@ namespace MeterAfricaClassLib.Services.MeterAfricaServices
             _responseService = responseService
                 ?? throw new ArgumentNullException(nameof(responseService));
         }
+        
 
         public async Task<ServiceResponseModel<DiscoResponse>> GetDiscos()
         {
@@ -37,7 +39,7 @@ namespace MeterAfricaClassLib.Services.MeterAfricaServices
                     return _responseService.SuccessResponse<DiscoResponse>("Discos retrived sucessfully", response);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

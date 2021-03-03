@@ -82,8 +82,15 @@ using MeterAfrica.Data;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 6 "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/Pages/ProcessMeter.razor"
+using Syncfusion.Blazor.Notifications;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(MeterAfrica.Shared.TokenLayout))]
-    [Microsoft.AspNetCore.Components.RouteAttribute("/processmeter")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class ProcessMeter : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -92,25 +99,45 @@ using MeterAfrica.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 59 "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/Pages/ProcessMeter.razor"
+#line 67 "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/Pages/ProcessMeter.razor"
       
+    SfToast ToastObj;
+    private string ToastPosition = "center";
 
     private MeterValidateReq meter = new MeterValidateReq();
+    private string errorMsg { get; set; }
+    private List<UIDiscoObject> GetIDiscoObjects;
 
-    public async Task<List<UIDiscoObject>> GetDiscos()
+    protected override async Task OnInitializedAsync()
+    {
+        GetIDiscoObjects = GetDiscos();
+    }
+
+    public List<UIDiscoObject> GetDiscos()
     {
         try
         {
-            List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
-            var res = await _meterService.GetDiscos();
-            foreach (var data in res.Data.data)
+
+            var res = _meterService.GetDiscos();
+            if (res.status)
             {
-                UIDiscoObject s = new UIDiscoObject();
-                s.Ref = data.reference;
-                s.Name = data.name;
-                objDisco.Add(s);
+                List<UIDiscoObject> objDisco = new List<UIDiscoObject>();
+                foreach (var data in res.data)
+                {
+                    UIDiscoObject s = new UIDiscoObject();
+                    s.Ref = data.reference;
+                    s.Name = data.name;
+                    objDisco.Add(s);
+                }
+                return objDisco;
             }
-            return objDisco;
+            else
+            {
+                return null;
+
+                // Show Error Notification
+            }
+
         }
         catch (Exception ex)
         {
@@ -118,9 +145,29 @@ using MeterAfrica.Data;
         }
     }
 
+
+    //45028963390
     public async Task ValidateMeter()
     {
 
+        store.Amount = meter.amount;
+        store.Email = meter.customerEmail;
+
+        var response = await _meterService.ValidateMeter(meter);
+
+
+        if (response.Status)
+        {
+            store.TransToken = response.Data.data.transactionRef;
+            NavManager.NavigateTo("/charge");
+        }
+        else
+        {
+            errorMsg = response.Message;
+            meter = new MeterValidateReq();
+            var toast = new ToastModel { Title = "Error!", Content = "Invalid Meter", CssClass = "e-toast-danger", Icon = "e-error toast-icons" };
+            await this.ToastObj.Show(toast);
+        }
     }
 
 
@@ -128,7 +175,10 @@ using MeterAfrica.Data;
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.SessionStorage.ISessionStorageService sessionStorage { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Data.UIStoreEntity store { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavManager { get; set; }
     }
 }
 #pragma warning restore 1591

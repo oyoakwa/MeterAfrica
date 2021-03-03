@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeterAfricaClassLib.Models;
 using MeterAfricaClassLib.Services.MeterAfricaServices;
+using MeterAfricaClassLib.Services.PayStackService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace MeterAfricaApi.Controllers
 {
@@ -13,8 +16,10 @@ namespace MeterAfricaApi.Controllers
     {
         private readonly IGetDiscoService _discoService;
         private readonly IValidateMeterNumberService _validateMeter;
+        private readonly IConfiguration _configuration;
         
-        public ProcessTokenController(IGetDiscoService discoService, IValidateMeterNumberService validateMeter)
+
+        public ProcessTokenController(IGetDiscoService discoService, IValidateMeterNumberService validateMeter, PayServices pay)
         {
             _discoService = discoService
                 ?? throw new ArgumentNullException(nameof(discoService));
@@ -23,11 +28,20 @@ namespace MeterAfricaApi.Controllers
         }
         
         [HttpGet("get-discos")]
-        [ProducesResponseType(type: typeof(ServiceResponseModel<DiscoResponse>), statusCode: 200)]
-        public async Task<IActionResult> GetDisco()
+        public async Task<ActionResult<DiscoResponse>> GetDisco()
         {
-            var res = await _discoService.GetDiscos();
-            return Ok(res);
+            try
+            {
+                var res = await _discoService.GetDiscos();
+                var responseData = res.Data;
+                return Ok(responseData);
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         [HttpPost("Validate-meter")]
@@ -37,5 +51,7 @@ namespace MeterAfricaApi.Controllers
             var response = await _validateMeter.ValidateMeterNo(req);
             return Ok(response);
         }
+
+        
     }
 }

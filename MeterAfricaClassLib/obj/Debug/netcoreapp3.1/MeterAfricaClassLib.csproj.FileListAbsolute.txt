@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:/Dev/WebDev/MeterAfrica/MeterAfricaClassLib/bin/Debug/netcoreapp3.1/MeterAfricaClassLib.deps.json
 C:/Dev/WebDev/MeterAfrica/MeterAfricaClassLib/bin/Debug/netcoreapp3.1/MeterAfricaClassLib.dll
 C:/Dev/WebDev/MeterAfrica/MeterAfricaClassLib/obj/Debug/netcoreapp3.1/MeterAfricaClassLib.csprojAssemblyReference.cache
@@ -16,3 +17,14 @@ C:/Dev/WebDev/MeterAfrica/MeterAfricaClassLib/obj/Debug/netcoreapp3.1/MeterAfric
 /Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/obj/Debug/netcoreapp3.1/MeterAfricaClassLib.csproj.CoreCompileInputs.cache
 /Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/obj/Debug/netcoreapp3.1/MeterAfricaClassLib.dll
 /Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/obj/Debug/netcoreapp3.1/MeterAfricaClassLib.pdb
+=======
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\bin\Debug\netcoreapp3.1\MeterAfricaClassLib.deps.json
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\bin\Debug\netcoreapp3.1\MeterAfricaClassLib.dll
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.csprojAssemblyReference.cache
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.AssemblyInfoInputs.cache
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.AssemblyInfo.cs
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\bin\Debug\netcoreapp3.1\MeterAfricaClassLib.pdb
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.dll
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.pdb
+C:\Dev\WebDev\MeterAfrica\MeterAfricaClassLib\obj\Debug\netcoreapp3.1\MeterAfricaClassLib.csproj.CoreCompileInputs.cache
+>>>>>>> fd829d162ba36811056abaf2fdb5944b847a5571

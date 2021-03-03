@@ -1,0 +1,53 @@
+﻿@page "/token"
+@layout MeterAfrica.Shared.TokenLayout
+
+@inject MeterAfrica.Data.UIStoreEntity store;
+@inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@using MeterAfricaClassLib.Models
+
+<div class="row">
+    <div class="col-lg-7 paye">
+        <div class="pay-info p-5">
+            <div class="clearfix">
+                <span class="pull-left"><strong>INVOICE VALUE</strong></span>
+                <span class="pull-right"> <strong>₦@tokenRes.data.amount</strong> </span>
+            </div>
+            <div class="text-center payment-details text-white py-2 my-3">
+                PAYMENT DETAILS
+            </div>
+            <div class="bg-white token_msg pt-3">
+                <img src="assets/images/Asset.png" class="w-25" alt="">
+                <p> <strong>Your Token is <text style="color:orangered"> @tokenRes.data.meterToken</text></strong> </p>
+                <p>
+                    <span>You will also receive your token via </span>
+                    <br>
+                    <span>Email, WhatsApp, or SMS. Thank you!</span>
+                </p>
+            </div>
+            <button class="btn btn-brand btn-block btn-rounded text-white mt-5"><strong>We need your help</strong></button>
+        </div>
+    </div>
+</div>
+
+@code{
+    TokenResponse tokenRes = new TokenResponse();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var payRef = store.PaymentTransRef; //await sessionStorage.GetItemAsync<string>("PaymentTransRef");
+        var amount = store.Amount;//await sessionStorage.GetItemAsync<string>("Amount");
+        var transtok = store.TransToken;//await sessionStorage.GetItemAsync<string>("TransToken");
+
+        var verifyPayResponse = _meterService.VerifyPay(payRef).Result;
+        if (verifyPayResponse.Status)
+        {
+            var tokResponse = _meterService.GetToken(transtok, Convert.ToDecimal(amount)).Result;
+            if (tokResponse.Status)
+            {
+                tokenRes = tokResponse.Data;
+            }
+        }
+    }
+
+}
