@@ -48,15 +48,7 @@
             },
             "Syncfusion.Blazor": {
               "target": "Package",
-<<<<<<< HEAD
               "version": "[18.4.0.44, )"
-=======
-              "version": "[3.0.1, )"
-            },
-            "PayStack.Net": {
-              "target": "Package",
-              "version": "[0.7.7, )"
->>>>>>> fd829d162ba36811056abaf2fdb5944b847a5571
             }
           },
           "imports": [
@@ -126,6 +118,10 @@
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "PayStack.Net": {
+              "target": "Package",
+              "version": "[0.7.7, )"
             }
           },
           "imports": [

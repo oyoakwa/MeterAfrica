@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2GWbH6vdGpcG7dOtsbozSgJEzfm7utPxUKtvvIwZPjBjn1E0NQrS/qt2WcqvrCbiEjtZILaoQY9WIELz6V8T+A==",
+  "dgSpecHash": "szoiLIVnFvcTBc7sMgyl9a8T/gzHArZTJ1YppCVfdk0IRQ7FldgiUVPQtG+025Yq+p2RowpqBJ3mU2Jpc0GZEg==",
   "success": true,
   "projectFilePath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/MeterAfrica.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "/Users/mac/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/mac/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
     "/Users/mac/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/Users/mac/.nuget/packages/paystack.net/0.7.7/paystack.net.0.7.7.nupkg.sha512",
     "/Users/mac/.nuget/packages/syncfusion.blazor/18.4.0.44/syncfusion.blazor.18.4.0.44.nupkg.sha512",
     "/Users/mac/.nuget/packages/syncfusion.excelexport.net.core/18.4.0.44/syncfusion.excelexport.net.core.18.4.0.44.nupkg.sha512",
     "/Users/mac/.nuget/packages/syncfusion.licensing/18.4.0.44/syncfusion.licensing.18.4.0.44.nupkg.sha512",
