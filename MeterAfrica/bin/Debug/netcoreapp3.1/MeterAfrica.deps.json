@@ -10,7 +10,7 @@
       "NETCOREAPP",
       "NETCOREAPP3_1"
     ],
-    "languageVersion": "8.0",
+    "languageVersion": "",
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
@@ -652,7 +652,7 @@
         "runtime": {
           "lib/netcoreapp3.1/Syncfusion.Licensing.dll": {
             "assemblyVersion": "18.4.0.44",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "18.4.0.44"
           }
         },
         "compile": {
