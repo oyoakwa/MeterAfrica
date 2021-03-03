@@ -1,8 +1,14 @@
-﻿@page "/ple"
+﻿@page "/"
 
+@layout MeterAfrica.Shared.TokenLayout
+@inject NavigationManager NavManager
 
-<h1>Hello, world!</h1>
+@code{
 
-Welcome to your new app.
+    protected override void OnInitialized()
+    {
+        NavManager.NavigateTo("/urbanshelter");
+    }
+}
 
 
