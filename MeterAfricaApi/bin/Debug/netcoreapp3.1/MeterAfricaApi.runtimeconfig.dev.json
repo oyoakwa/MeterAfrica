@@ -1,9 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\OYO AKWA\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\OYO AKWA\\.nuget\\packages",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "/Users/mac/.dotnet/store/|arch|/|tfm|",
+      "/Users/mac/.nuget/packages"
     ]
   }
 }

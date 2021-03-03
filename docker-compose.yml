@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  meterafrica:
+    image: ${DOCKER_REGISTRY-}meterafrica
+    build:
+      context: .
+      dockerfile: MeterAfrica/Dockerfile
+
+  meterafricaapi:
+    image: ${DOCKER_REGISTRY-}meterafricaapi
+    build:
+      context: .
+      dockerfile: MeterAfricaApi/Dockerfile
+
