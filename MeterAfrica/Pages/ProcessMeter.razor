@@ -123,6 +123,7 @@
         if (response.Status)
         {
             store.TransToken = response.Data.data.transactionRef;
+            store.MeterName = response.Data.data.fullName;
             NavManager.NavigateTo("/charge");
         }
         else

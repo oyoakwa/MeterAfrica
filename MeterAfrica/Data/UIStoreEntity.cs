@@ -11,5 +11,6 @@ namespace MeterAfrica.Data
         public string Amount { get; set; }
         public string TransToken { get; set; }
         public string Email { get; set; }
+        public string MeterName { get; set; }
     }
 }
