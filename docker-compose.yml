@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: MeterAfrica/Dockerfile
+
+  meterafricaapi:
+    image: ${DOCKER_REGISTRY-}meterafricaapi
+    build:
+      context: .
+      dockerfile: MeterAfricaApi/Dockerfile
+

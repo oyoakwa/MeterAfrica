@@ -22,6 +22,7 @@ namespace MeterAfrica
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("http://*:8881");
                     webBuilder.UseStartup<Startup>();
                 });
     }

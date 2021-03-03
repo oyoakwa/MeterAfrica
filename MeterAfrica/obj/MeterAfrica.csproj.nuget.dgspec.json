@@ -1,34 +1,99 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfrica\\MeterAfrica.csproj": {}
+    "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/MeterAfrica.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj": {
+    "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/MeterAfrica.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj",
-        "projectName": "MeterAfricaClassLib",
-        "projectPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj",
-        "packagesPath": "C:\\Users\\OYO AKWA\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\obj\\",
+        "projectUniqueName": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/MeterAfrica.csproj",
+        "projectName": "MeterAfrica",
+        "projectPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/MeterAfrica.csproj",
+        "packagesPath": "/Users/mac/.nuget/packages/",
+        "outputPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfrica/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\OYO AKWA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mac/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj": {
+                "projectPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Blazored.SessionStorage": {
+              "target": "Package",
+              "version": "[1.0.13, )"
+            },
+            "Syncfusion.Blazor": {
+              "target": "Package",
+              "version": "[18.4.0.44, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj",
+        "projectName": "MeterAfricaClassLib",
+        "projectPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj",
+        "packagesPath": "/Users/mac/.nuget/packages/",
+        "outputPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mac/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +105,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Mapster": {
               "target": "Package",
@@ -69,79 +135,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfrica\\MeterAfrica.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfrica\\MeterAfrica.csproj",
-        "projectName": "MeterAfrica",
-        "projectPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfrica\\MeterAfrica.csproj",
-        "packagesPath": "C:\\Users\\OYO AKWA\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfrica\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\OYO AKWA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "projectReferences": {
-              "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj": {
-                "projectPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
-          "dependencies": {
-            "Blazored.SessionStorage": {
-              "target": "Package",
-              "version": "[1.0.13, )"
-            },
-            "Syncfusion.Blazor": {
-              "target": "Package",
-              "version": "[18.4.0.44, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

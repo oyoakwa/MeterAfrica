@@ -768,34 +768,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\OYO AKWA\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/mac/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj",
+      "projectUniqueName": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj",
       "projectName": "MeterAfricaClassLib",
-      "projectPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\MeterAfricaClassLib.csproj",
-      "packagesPath": "C:\\Users\\OYO AKWA\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\WebDev\\MeterAfrica\\MeterAfricaClassLib\\obj\\",
+      "projectPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/MeterAfricaClassLib.csproj",
+      "packagesPath": "/Users/mac/.nuget/packages/",
+      "outputPath": "/Users/mac/Desktop/meterafrica/MeterAfrica/MeterAfricaClassLib/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\OYO AKWA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/mac/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -807,6 +802,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Mapster": {
             "target": "Package",
@@ -836,7 +832,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

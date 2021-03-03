@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>8972825c-800c-467e-a171-24569425a595</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,4 +15,7 @@
     <ProjectReference Include="..\MeterAfricaClassLib\MeterAfricaClassLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
 </Project>

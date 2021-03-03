@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeterAfricaClassLib", "Mete
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeterAfricaApi", "MeterAfricaApi\MeterAfricaApi.csproj", "{13BFEE2B-0CCB-4B96-8562-50A7FAE71773}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{105DF8AD-A6D1-475E-800D-083CB4BBD63A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{13BFEE2B-0CCB-4B96-8562-50A7FAE71773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13BFEE2B-0CCB-4B96-8562-50A7FAE71773}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13BFEE2B-0CCB-4B96-8562-50A7FAE71773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{105DF8AD-A6D1-475E-800D-083CB4BBD63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105DF8AD-A6D1-475E-800D-083CB4BBD63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105DF8AD-A6D1-475E-800D-083CB4BBD63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{105DF8AD-A6D1-475E-800D-083CB4BBD63A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
