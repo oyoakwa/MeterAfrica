@@ -4,7 +4,6 @@
 
 @using MeterAfrica.Data
 @using Syncfusion.Blazor.Notifications
-
 @inject NavigationManager NavManager
 @inject Data.UIStoreEntity store;
 @inject MeterAfrica.Data.MeterAfricaServices.ProcessMeterService _meterService;
@@ -113,26 +112,34 @@
     //45028963390
     public async Task ValidateMeter()
     {
-
-        store.Amount = meter.amount;
-        store.Email = meter.customerEmail;
-
-        var response = await _meterService.ValidateMeter(meter);
-
-
-        if (response.Status)
+        try
         {
-            store.TransToken = response.Data.data.transactionRef;
-            store.MeterName = response.Data.data.fullName;
-            NavManager.NavigateTo("/charge");
+            store.Amount = meter.amount;
+            store.Email = meter.customerEmail;
+
+            var response = await _meterService.ValidateMeter(meter);
+
+
+            if (response.Status)
+            {
+                store.TransToken = response.Data.data.transactionRef;
+                store.MeterName = response.Data.data.fullName;
+                NavManager.NavigateTo("/charge");
+            }
+            else
+            {
+                errorMsg = response.Message;
+                meter = new MeterValidateReq();
+                var toast = new ToastModel { Title = "Error!", Content = "Invalid Meter", CssClass = "e-toast-danger", Icon = "e-error toast-icons" };
+                await this.ToastObj.Show(toast);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            errorMsg = response.Message;
-            meter = new MeterValidateReq();
-            var toast = new ToastModel { Title = "Error!", Content = "Invalid Meter", CssClass = "e-toast-danger", Icon = "e-error toast-icons" };
-            await this.ToastObj.Show(toast);
+
+            throw;
         }
+
     }
 
 

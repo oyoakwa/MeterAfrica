@@ -64,7 +64,7 @@ namespace MeterAfrica
 
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UsePathBase("/MeterAfrica");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

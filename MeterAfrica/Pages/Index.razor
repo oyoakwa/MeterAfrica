@@ -5,10 +5,12 @@
 
 @code{
 
-    protected override void OnInitialized()
-    {
-        NavManager.NavigateTo("/urbanshelter");
-    }
+    
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            NavManager.NavigateTo("/urbanshelter");
+        }
 }
 
 
