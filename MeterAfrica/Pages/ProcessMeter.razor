@@ -1,5 +1,7 @@
 ﻿@page "/urbanshelter"
 @layout MeterAfrica.Shared.TokenLayout
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web;
 
 
 @using MeterAfrica.Data
@@ -52,13 +54,13 @@
                     <input type="number" @bind-value="meter.amount" class="form-control border-0" placeholder="Amount Of power in naira">
                 </div>
                 <div class="form-group pl-2 py-2">
-                    <button type="button" @onclick="ValidateMeter" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Proceed to Start Payment</text></button>
+                    <button @onclick="ValidateMeter" class="btn btn-yellow btn-block btn-rounded"><text style="font-size:70%">Proceed to Start Payment</text></button>
                 </div>
             </div>
 
-            <SfToast @ref="ToastObj" ID="toast_type">
-                <ToastPosition X="@ToastPosition"></ToastPosition>
-            </SfToast>
+            @*<SfToast @ref="ToastObj" ID="toast_type">
+                    <ToastPosition X="@ToastPosition" Y=""></ToastPosition>
+                </SfToast>*@
         </div>
     </div>
 </div>
